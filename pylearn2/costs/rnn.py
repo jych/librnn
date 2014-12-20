@@ -8,7 +8,6 @@ __license__ = "3-clause BSD"
 __maintainer__ = "Junyoung Chung"
 __email__ = "chungjun@iro"
 
-import ipdb
 import theano
 import theano.tensor as T
 from itertools import izip
@@ -71,38 +70,6 @@ class RNNCost(DefaultDataSpecsMixin, Cost):
         updates = OrderedDict()
 
         return gradients, updates
-
-
-class RNNGenerativeCost(RNNCost):
-    """
-    The default cost defined in RNN class
-    """
-    supervised = True
-
-    def expr(self, model, data, **kwargs):
-
-        space, source = self.get_data_specs(model)
-        space.validate(data)
-        X, Y = data
-        Y_hat = model.gprop(X)
-
-        return model.layers[-1].cost(Y, Y_hat)
-
-
-class RNNAdaptiveTeacherForcingCost(RNNCost):
-    """
-    The default cost defined in RNN class
-    """
-    supervised = True
-
-    def expr(self, model, data, **kwargs):
-
-        space, source = self.get_data_specs(model)
-        space.validate(data)
-        X, Y = data
-        Y_hat = model.gfprop(X)
-
-        return model.layers[-1].cost(Y, Y_hat)
 
 
 class WeightDecay(NullDataSpecsMixin, Cost):
