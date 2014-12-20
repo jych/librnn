@@ -1,0 +1,62 @@
+!obj:pylearn2.train.Train {
+  dataset: &train !obj:librnn.pylearn2.datasets.music.MusicSequence {
+    which_dataset: 'jsb',
+    which_set: 'train'
+  },
+  model: !obj:pylearn2.sandbox.rnn.models.rnn.RNN {
+    input_space: !obj:pylearn2.sandbox.rnn.space.SequenceDataSpace {
+      space: !obj:pylearn2.space.VectorSpace {
+        dim: &input_dim 96
+      }
+    },
+    layers: [
+      !obj:pylearn2.sandbox.rnn.models.rnn.GRU {
+        layer_name: 'h_1',
+        dim: 36,
+        irange: 0.1,
+        weight_noise: 1
+      },
+      !obj:librnn.pylearn2.models.mlp.Sigmoid {
+        layer_name: 'y',
+        dim: *input_dim,
+        irange: 0.1
+      }
+    ]
+  },
+  algorithm: !obj:pylearn2.training_algorithms.sgd.SGD {
+    batch_size: 1,
+    learning_rate: 0.001,
+    learning_rule: !obj:librnn.pylearn2.training_algorithms.learning_rule.RMSPropMomentum {
+      init_momentum: 0.9,
+      momentum_clipping: 1.
+    },
+    monitoring_dataset: {
+      'train' : *train,
+      'valid' : !obj:librnn.pylearn2.datasets.music.MusicSequence {
+        which_dataset: 'jsb',
+        which_set: 'valid'
+      }
+    },
+    cost: !obj:librnn.pylearn2.costs.rnn.RNNCost {},
+    termination_criterion: !obj:pylearn2.termination_criteria.And {
+      criteria: [
+        !obj:pylearn2.termination_criteria.EpochCounter {
+          max_epochs: &max_epochs 500
+        }
+      ]
+    }
+  },
+  extensions: [
+    !obj:pylearn2.train_extensions.best_params.MonitorBasedSaveBest {
+      channel_name: 'valid_objective',
+      save_path: "lstm_best.pkl"
+    },
+    !obj:pylearn2.training_algorithms.sgd.LinearDecayOverEpoch {
+      start: 1,
+      saturate: *max_epochs,
+      decay_factor: 0.01
+    }
+  ],
+  save_path: "lstm.pkl",
+  save_freq: 10
+}
