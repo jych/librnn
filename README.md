@@ -16,3 +16,5 @@ To give more precise information which commit hash to use:
 Theano commit: 0a0821717ea86fe33276d5770d41aaa921f6f06b  
 Pylearn2 commit: 852c71fe0e83b7a4896e68babb2cfcf866697c73
 
+GRU is currently adding on to lisa-lab/pylearn2,  
+hence, for the moment we cannot access the code
