@@ -11,7 +11,7 @@ However, we try to put both implementations of LSTM:
 You can find the experimental settings in yaml files (since there have
 been updates in implementation the number could be slightly different).
 
-You need to use latest version of Theano and Pylearn2.
+You need the latest version of Theano and Pylearn2.  
 To give more precise information which commit hash to use:  
 Theano commit: 0a0821717ea86fe33276d5770d41aaa921f6f06b  
 Pylearn2 commit: 852c71fe0e83b7a4896e68babb2cfcf866697c73
