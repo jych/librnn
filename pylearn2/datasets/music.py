@@ -7,16 +7,12 @@ __author__ = "Junyoung Chung"
 
 import os
 import numpy as np
-from egg.pylearn2.datasets.SpeechDataMixin import SpeechDataMixin
+from librnn.pylearn2.datasets.SpeechDataMixin import SpeechDataMixin
 from functools import wraps
 from pylearn2.datasets.vector_spaces_dataset import VectorSpacesDataset
 from pylearn2.sandbox.rnn.utils.iteration import SequenceDatasetIterator
 from pylearn2.sandbox.rnn.space import SequenceDataSpace
-from pylearn2.space import (
-    Conv2DSpace,
-    CompositeSpace,
-    VectorSpace,
-    IndexSpace)
+from pylearn2.space import CompositeSpace, VectorSpace
 from pylearn2.utils.iteration import resolve_iterator_class
 from pylearn2.utils.rng import make_np_rng
 
@@ -38,7 +34,8 @@ class MusicData(SpeechDataMixin):
             raise ValueError(which_set + " is not a recognized value. " +
                              "Valid values are ['midi', 'nottingham', 'muse', 'jsb'].")
 
-        _data_path = '/data/lisa/data/music/'
+        assert 0
+        _data_path = '${YOUR_DATAPATH}'
         if which_dataset == 'midi':
             _path = os.path.join(_data_path + "Piano-midi.de.pickle")
         elif which_dataset == 'nottingham':
