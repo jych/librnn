@@ -1,7 +1,7 @@
 librnn
 ======
 This repository contains implementation of LSTM and GRU experiments
-of the paper:
+of the paper://
 "Empirical Evaluation of Gated Recurrent Neural Networks", Chung et al., NIPS2014DLRLW.
 
 However, we try to put both implementations of LSTM:
