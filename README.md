@@ -17,5 +17,5 @@ Theano commit: 0a0821717ea86fe33276d5770d41aaa921f6f06b
 Pylearn2 commit: 852c71fe0e83b7a4896e68babb2cfcf866697c73
 
 GRU is currently adding on to lisa-lab/pylearn2,  
-hence, for the moment we cannot access the code.
-You can find the actual implementation of GRU and LSTM [here](https://github.com/lisa-lab/pylearn2/tree/master/pylearn2/sandbox/rnn/rnn.py)
+hence, for the moment we cannot access the code.  
+You can find the actual implementation of GRU and LSTM [here](https://github.com/lisa-lab/pylearn2/blob/master/pylearn2/sandbox/rnn/models/rnn.py)
