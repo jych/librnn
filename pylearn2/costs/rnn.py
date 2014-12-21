@@ -57,12 +57,8 @@ class RNNCost(DefaultDataSpecsMixin, Cost):
             norm_gs = T.switch(T.ge(norm_gs, self.max_magnitude),
                                self.max_magnitude / norm_gs,
                                1.)
-            """
-            norm_gs = T.switch(T.ge(T.sqrt(norm_gs), self.max_magnitude),
-                               self.max_magnitude / T.sqrt(norm_gs), 1.)
-            """
+
             for param, grad in gradients.items():
-                #gradients[param] = grad * norm_gs
                 gradients[param] = T.switch(not_finite,
                                             .1 * param,
                                             grad * norm_gs)
