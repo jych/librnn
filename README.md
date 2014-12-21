@@ -19,4 +19,4 @@ Pylearn2 commit: 852c71fe0e83b7a4896e68babb2cfcf866697c73
 GRU is currently adding on to lisa-lab/pylearn2,  
 hence, for the moment we cannot access the code.
 You can find the actual implementation of GRU and LSTM at below path:  
-github.com/lisa-lab/pylearn2/tree/master/pylearn2/sandbox/rnn/rnn.py
+[Absolute README link](https://github.com/lisa-lab/pylearn2/tree/master/pylearn2/sandbox/rnn/rnn.py)
