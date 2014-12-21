@@ -67,7 +67,6 @@ class Sigmoid(Sigmoid):
         """
         total = self.kl(Y=Y, Y_hat=Y_hat)
 
-        #ave = total.mean()
         ave = total.sum()
 
         return ave
