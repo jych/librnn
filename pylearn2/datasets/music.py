@@ -7,7 +7,6 @@ __author__ = "Junyoung Chung"
 
 import os
 import numpy as np
-from librnn.pylearn2.datasets.SpeechDataMixin import SpeechDataMixin
 from functools import wraps
 from pylearn2.datasets.vector_spaces_dataset import VectorSpacesDataset
 from pylearn2.sandbox.rnn.utils.iteration import SequenceDatasetIterator
@@ -17,38 +16,7 @@ from pylearn2.utils.iteration import resolve_iterator_class
 from pylearn2.utils.rng import make_np_rng
 
 
-class MusicData(SpeechDataMixin):
-
-    def load_data(self, which_dataset, which_set):
-        """
-        which_dataset : choose between 'short' and 'long'
-
-        """
-        # Check which_set
-        if which_set not in ['train', 'valid', 'test']:
-            raise ValueError(which_set + " is not a recognized value. " +
-                             "Valid values are ['train', 'valid', 'test'].")
-
-        # Check which_dataset
-        if which_dataset not in ['midi', 'nottingham', 'muse', 'jsb']:
-            raise ValueError(which_set + " is not a recognized value. " +
-                             "Valid values are ['midi', 'nottingham', 'muse', 'jsb'].")
-
-        assert 0
-        _data_path = '${YOUR_DATAPATH}'
-        if which_dataset == 'midi':
-            _path = os.path.join(_data_path + "Piano-midi.de.pickle")
-        elif which_dataset == 'nottingham':
-            _path = os.path.join(_data_path + "Nottingham.pickle")
-        elif which_dataset == 'muse':
-            _path = os.path.join(_data_path + "MuseData.pickle")
-        elif which_dataset == 'jsb':
-            _path = os.path.join(_data_path + "JSB Chorales.pickle")
-        data = np.load(_path)
-        self.raw_data = data[which_set]
-
-
-class MusicSequence(VectorSpacesDataset, MusicData):
+class MusicSequence(VectorSpacesDataset):
 
     def __init__(self,
                  which_dataset,
@@ -89,6 +57,34 @@ class MusicSequence(VectorSpacesDataset, MusicData):
         )
         super(MusicSequence, self).__init__(data=(X, y),
                                              data_specs=(space, source))
+
+    def load_data(self, which_dataset, which_set):
+        """
+        which_dataset : choose between 'short' and 'long'
+
+        """
+        # Check which_set
+        if which_set not in ['train', 'valid', 'test']:
+            raise ValueError(which_set + " is not a recognized value. " +
+                             "Valid values are ['train', 'valid', 'test'].")
+
+        # Check which_dataset
+        if which_dataset not in ['midi', 'nottingham', 'muse', 'jsb']:
+            raise ValueError(which_set + " is not a recognized value. " +
+                             "Valid values are ['midi', 'nottingham', 'muse', 'jsb'].")
+
+        assert 0
+        _data_path = '${YOUR_DATAPATH}'
+        if which_dataset == 'midi':
+            _path = os.path.join(_data_path + "Piano-midi.de.pickle")
+        elif which_dataset == 'nottingham':
+            _path = os.path.join(_data_path + "Nottingham.pickle")
+        elif which_dataset == 'muse':
+            _path = os.path.join(_data_path + "MuseData.pickle")
+        elif which_dataset == 'jsb':
+            _path = os.path.join(_data_path + "JSB Chorales.pickle")
+        data = np.load(_path)
+        self.raw_data = data[which_set]
 
     def list_to_nparray(self, x, dim):
 
